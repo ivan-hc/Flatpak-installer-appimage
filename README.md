@@ -18,11 +18,11 @@ AppImage of the "Sideload" utility from elementaryOS that installs Flatpaks from
      
 2. Place the *.desktop file in ~/.local/share/applications
 
-       mkdir -p ~/.local/share/applications && wget https://raw.githubusercontent.com/ivan-hc/io.elementary.sideload.AppImage/main/io.elementary.sideload.desktop -O ~/.local/share/applications/ && chmod a+x ~/.local/share/applications/io.elementary.sideload.desktop
+       mkdir -p ~/.local/share/applications && wget https://raw.githubusercontent.com/ivan-hc/io.elementary.sideload.AppImage/main/io.elementary.sideload.desktop -O ~/.local/share/applications/io.elementary.sideload.desktop && chmod a+x ~/.local/share/applications/io.elementary.sideload.desktop
        
 3. Place the io.elementary.sideload.svg icon in ~/.local/share/icons
 
-       mkdir -p ~/.local/share/icons/ && wget https://raw.githubusercontent.com/ivan-hc/io.elementary.sideload.AppImage/main/io.elementary.sideload.svg -O ~/.local/share/icons/
+       mkdir -p ~/.local/share/icons/ && wget https://raw.githubusercontent.com/ivan-hc/io.elementary.sideload.AppImage/main/io.elementary.sideload.svg -O ~/.local/share/icons/io.elementary.sideload.svg
        
 4. Go to https://flathub.org and click the "Install" button of an app you're interested in and select "Sideload" to open the file. If this does not work, right-click on the downloaded .flatpakref file (only the first time) to enable Sideload as the default app for this extension.
 
