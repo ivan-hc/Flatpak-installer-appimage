@@ -47,14 +47,14 @@ ingredients:
 MAIN_DEB=$(find . -type f -name "$APP\_*.deb" | head -1 | sed 's:.*/::')
 if test -f ./"$APP"/"$MAIN_DEB"; then
 	ar x ./"$APP"/"$MAIN_DEB" && tar xf ./control.tar.* && rm -f ./control.tar.* ./data.tar.* || exit 1
-	VERSION=$(grep Version 0<control | cut -c 10-)
+	VERSION=$(grep Version 0<control | cut -c 10- | tr '+~ ' '_')
 else
 	VERSION="test"
 fi
 
 # LIBUNIONPRELOAD
 rm -f ./"$APP"/"$APP".AppDir/libunionpreload.so
-wget -q https://github.com/project-portable/libunionpreload/releases/download/amd64/libunionpreload.so -O ./"$APP"/"$APP".AppDir/libunionpreload.so && chmod a+x ./"$APP"/"$APP".AppDir/libunionpreload.so || exit 1
+#wget -q https://github.com/project-portable/libunionpreload/releases/download/amd64/libunionpreload.so -O ./"$APP"/"$APP".AppDir/libunionpreload.so && chmod a+x ./"$APP"/"$APP".AppDir/libunionpreload.so || exit 1
 
 # COMPILE SCHEMAS
 glib-compile-schemas ./"$APP"/"$APP".AppDir/usr/share/glib-2.0/schemas/ || echo "No ./usr/share/glib-2.0/schemas/"
@@ -68,7 +68,7 @@ export UNION_PRELOAD="${HERE}"
 
 export PATH="${HERE}"/usr/bin/:"${HERE}"/usr/sbin/:"${HERE}"/usr/games/:"${HERE}"/bin/:"${HERE}"/sbin/:"${PATH}"
 
-if test -d "${HERE}"/libunionpreload.so; then export LD_PRELOAD="${HERE}"/libunionpreload.so; fi
+#if test -d "${HERE}"/libunionpreload.so; then export LD_PRELOAD="${HERE}"/libunionpreload.so; fi
 export LD_LIBRARY_PATH="${HERE}"/usr/lib/:"${HERE}"/usr/lib/x86_64-linux-gnu/:"${HERE}"/lib/:"${HERE}"/lib64/:"${HERE}"/lib/x86_64-linux-gnu/:"${LD_LIBRARY_PATH}"
 #export LD_LIBRARY_PATH=/lib/:/lib64/:/lib/x86_64-linux-gnu/:/usr/lib/:"${LD_LIBRARY_PATH}"
 
@@ -124,4 +124,4 @@ PATH="$PATH:$PWD" ARCH=x86_64 ./appimagetool -n ./"$APP"/"$APP".AppDir
 if ! test -f ./*.AppImage; then
 	echo "No AppImage available."; exit 1
 fi
-cd .. && mv ./tmp/*.AppImage . && chmod a+x ./*.AppImage || exit 1
+cd .. && mv ./tmp/*.AppImage ./"$APP"-"$VERSION"-x86_64.AppImage && chmod a+x ./*.AppImage || exit 1
