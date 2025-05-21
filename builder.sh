@@ -123,5 +123,5 @@ chmod a+x ./desktop-file-validate
 PATH="$PATH:$PWD" ARCH=x86_64 ./appimagetool -n ./"$APP"/"$APP".AppDir
 if ! test -f ./*.AppImage; then
 	echo "No AppImage available."; exit 1
-fi 
+fi
 cd .. && mv ./tmp/*.AppImage . && chmod a+x ./*.AppImage || exit 1
